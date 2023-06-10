@@ -19,6 +19,7 @@ It is beta version so for use it you need some skill in Cheat Engine.
 ## Starting
   
 Input in cmd: 'g++ main.cpp -o main.exe'
+  
 Input in cmd: './main.exe'
 
 Open game window and wait. Bot will update market scan most low-cost item and if he's cost below you set - buy it.
