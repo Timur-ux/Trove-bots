@@ -2,17 +2,23 @@
 
 Here 2 main functions: fishing and fast cleaning inventory from trophies.
 
-To start fishbot input in cmd: python fishbot.py
+To start fishbot input in cmd:
 
-To start clening inventory input in cmd: python cleanInv.py
+```
+g++ .\Fishbot.cpp -o Fishbot.exe -L ./sdk -lpsapi
+```
 
-## Controlling
-These 2 bots controlling by + (start) and - (pause)
+So you get Fishbot.exe file. You can run it just by open it as like as other usual executable file
 
-## Configuration
-Fishbot react on chaging image around your float. So you can change he's sensitivity changing value in 62 row in file 'fishbot.py'.
-If you decrease value - senitivity increase and opposite.
+To start clening inventory input in cmd: 
 
-In cmd panel Fishbot print value of image's difference. It can help you to configure bot.
+```
+python cleanInv.py
+```
 
-In my tests the best pole is rainbow pole.
+## Releases
+
+### V 1.1
+
+1. Change fishbot logic, now he work with game data not image from screen.
+

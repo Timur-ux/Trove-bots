@@ -6,57 +6,55 @@
 #include <string>
 using namespace std;
 
-double sum(vector<double> v)
+int main(int argc, char * argv[])
 {
-    double result = 0;
-    for(double el: v)
-    {
-        result += el;
-    }
-    return result;
-}
-
-int main()
-{
-    Sleep(5000);
     Bypass bypass;
-    bypass.Attach(5480);
-    vector<uintptr_t> offsets = {0x01cedc50, 0x3c, 0x0, 0x4};
+    uintptr_t pid = bypass.GetProcessIDByName("Trove.exe");
+
+    if(!bypass.Attach(pid))
+    {
+        cout << "Attach Error" << endl;
+    }
+    uintptr_t base = (uintptr_t)bypass.GetModuleBase();
+    vector<uintptr_t> offsets = {base+0x0103B124, 0xb8, 0xc, 0x14, 0x140, 0x0, 0x4};
     uintptr_t Offset_result;
     int result, count;
-    char c;
-    ofstream log("Credit Pouch_log.txt");
-    // log << "Name" << ',' << "sumCost" << ',' << "UnitCost" << endl;
-    string name = "Credit Pouch";
-    vector<double> cache;
+    string name = argv[2];
+    int bias = atoi(argv[1]);
+    cout << "Press ENTER button to chek connection bot to game" << endl;
+    getchar();
+    Offset_result = bypass.ReadChain(offsets);
+    bypass.Read(Offset_result, &result, sizeof(int));
+    bypass.Read(Offset_result-4, &count, sizeof(int));
+    cout << name << " AllCost = " << result << ", count = " << count << endl;
+    cout << "If Allcost equal first item in market and count equal first item count - allright," << endl;
+    cout << "Bot connect correctly? Press Y if yes, any other button if not" << endl; 
+    char c = getchar();
+    if(c != 'y' || c != 'Y')
+    {
+        return 0;
+    }
+    cout << "Start sniping items, turn game window to front" << endl;
+    Sleep(5000);
+
     for(int i = 0;; i++)
     {
         reload();
         Sleep(1000);
         Offset_result = bypass.ReadChain(offsets);
-        if(i <= 3)
-        {
-            cout << hex <<Offset_result << dec << ',' << result << ',' << count << ',' << (double)result/count << endl;
-        }
         bypass.Read(Offset_result, &result, sizeof(int));
         bypass.Read(Offset_result-4, &count, sizeof(int));
-        if(i%5==0)
+        if(i <= 3)
         {
-            log << name << ',' << result << ',' << (double)result/count << endl;
+            cout << name << " cost = " << result << ",  count = " << count << ", Unit price = " << (double)result/count << endl;
         }
-        if(1000000 >= (double)result/count)
+        if(bias >= (double)result/count)
         {
-            cout << "Buying " << count << ' ' << name << " for " << result << " flux" << endl;
-            log << "Buying " << count << ' ' << name << " for " << result << " flux" << endl;
+            cout << "Trying to Buy " << count << ' ' << name << " for " << result << " flux" << endl;
             Sleep(500);
             buy();
         }
-        cache.push_back((double)result/count);
-        if(cache.size()>100)
-        {
-            cache.erase(cache.begin());
-        }
-        Sleep(3000);
+        Sleep(4000);
     }
     return 0;
 }

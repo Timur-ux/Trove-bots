@@ -1,4 +1,4 @@
-from keyboard import press, release, is_pressed
+from keyboard import press, release, is_pressed, wait
 from time import sleep
 m1atack = 'p'
 m2atack = ','
@@ -18,11 +18,10 @@ def run():
             sleep(2)
             return
         press(m1atack)
-        sleep(0.5)
+        sleep(1)
         release(m1atack)
 
 while True:
-    sleep(0.5)
-    if(is_pressed('4')):
-        click(m1atack)
-        run()
+    wait('4')
+    click(m1atack)
+    run()

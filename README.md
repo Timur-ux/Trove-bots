@@ -20,5 +20,3 @@ In each bot directory exist small Readme file
 3. Keyboard
 4. numpy
 5. PIL
-
-Cheat Engine for Item Sniper

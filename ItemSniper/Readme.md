@@ -6,20 +6,27 @@ It is beta version so for use it you need some skill in Cheat Engine.
 
 ## How to use it
 
-1. Open main.cpp and in row 'bypass.attach(<num>)' set Game's id. You can see game's id in process explorer.
+1. Open cmd in project directory
+2. Input the command below
 
-  Remember: next steps you need do again every time you close market or enter the game. 
+```
+g++ main.cpp -o main.exe -L ./sdk -lpsapi
+```
 
-2. In game: open market and find for any item.
-3. Using Cheat Engine find static pointer to first item's cost. I don't explain how do this because i won't.
-4. Insert in file main.cpp in row 'vector<uintprt_t> offsets = {...}' path of static pointer in '...' place.
-5. After that in file ReloadBuy.cpp insert coordinates of SEARCH button, buy first item button and CONFIRM button. You can find coordinates of these buttons using according file in 'tool' directory.
-  Coordiantes of SEARCH button input in reload function X, Y variable, FIB and CONFIRM in buy function in x1, y1 and x2, y2 respectively.
-6. In file main.cpp in 47 row input cost per unit below which bot will buy item.
+So you get main.exe file - the bot file
+
 ## Starting
-  
-Input in cmd: 'g++ main.cpp -o main.exe'
-  
-Input in cmd: './main.exe'
 
-Open game window and wait. Bot will update market scan most low-cost item and if he's cost below you set - buy it.
+Input
+
+```
+./main.exe <Cost> <ItemNameWithoutSpaces>
+```
+
+So you go through small chek of correct bot connection and if allright start it
+  
+## Releases
+
+### V1.1
+1. Find static address of the game, so bot compilation become much more easy.
+2. Bot must be work well as minimum before game update become.
