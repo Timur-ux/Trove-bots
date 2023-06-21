@@ -30,7 +30,7 @@ int main(int argc, char * argv[])
     cout << "If Allcost equal first item in market and count equal first item count - allright," << endl;
     cout << "Bot connect correctly? Press Y if yes, any other button if not" << endl; 
     char c = getchar();
-    if(c != 'y' || c != 'Y')
+    if(c != 'y' && c != 'Y')
     {
         return 0;
     }
